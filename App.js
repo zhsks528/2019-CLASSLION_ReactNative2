@@ -8,35 +8,38 @@ import {
 import MainScreen from "./screens/MainScreen";
 import DetailScreen from "./screens/DetailScreen";
 import WriteScreen from "./screens/WriteScreen";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const BaseNavi = createBottomTabNavigator({
-  MainScreen: {
-    screen: MainScreen
-  },
-  DetailScreen: {
-    screen: DetailScreen,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => (
-        <MaterialCommunityIcons
-          name="calender-multiselect"
-          size={30}
-          style={{ color: tintColor }}
-        />
-      )
+const BaseNavi = createBottomTabNavigator(
+  {
+    MainScreen: {
+      screen: MainScreen
+    },
+    DetailScreen: {
+      screen: DetailScreen
+    },
+    WriteScreen: {
+      screen: WriteScreen
     }
-  },
-  WriteScreen: {
-    screen: WriteScreen
   }
-
   /* 아이콘만 보여주고 싶을 때  */
   // tabBarOptions: {
   //   showLabel: false
   // }
-});
+);
 
-const MyNavi = createAppContainer(BaseNavi);
+const BaseNavi2 = createStackNavigator(
+  {
+    Write: WriteScreen,
+    Tab: BaseNavi
+  },
+  {
+    initialRouteName: "Tab"
+    // mode : 'modal' iOS 만 설정
+    // headerMode: "screen"
+  }
+);
+
+const MyNavi = createAppContainer(BaseNavi2);
 export default function App() {
   return (
     <View style={styles.container}>
