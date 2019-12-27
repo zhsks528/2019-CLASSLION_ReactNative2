@@ -54,7 +54,12 @@ export default class MainScreen extends Component {
             })}
             renderItem={({ item, index }) => {
               return (
-                <TouchableOpacity style={styles.listitem}>
+                <TouchableOpacity
+                  style={styles.listitem}
+                  onPress={() => {
+                    this.props.navigation.navigate("Detail", { post: item });
+                  }}
+                >
                   <View>
                     <Text style={styles.listtext}>제목 : {item.title}</Text>
                     <Text style={styles.listtext}>내용 : {item.content}</Text>

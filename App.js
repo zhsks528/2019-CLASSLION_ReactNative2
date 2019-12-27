@@ -30,7 +30,8 @@ const BaseNavi = createBottomTabNavigator(
 const BaseNavi2 = createStackNavigator(
   {
     Write: WriteScreen,
-    Tab: BaseNavi
+    Tab: BaseNavi,
+    Detail: DetailScreen
   },
   {
     initialRouteName: "Tab"
