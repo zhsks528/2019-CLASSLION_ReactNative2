@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  AsyncStorage
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -40,16 +41,32 @@ export default class MainScreen extends Component {
     ]
   };
 
+  _storeData = async () => {
+    await AsyncStorage.setItem("@diary:state", JSON.stringify(this.state));
+  };
+
+  _getData = async () => {
+    const mystate = await AsyncStorage.getItem("@diary:state");
+
+    if (mystate !== null) {
+      this.setState(JSON.parse(mystate));
+    }
+  };
+
   componentDidMount() {
+    this._getData();
     this.props.navigation.addListener("didFocus", () => {
       newpost = this.props.navigation.getParam("myparam");
       signal = this.props.navigation.getParam("signal");
 
       if (newpost) {
         const PrevPosts = [...this.state.Posts];
-        this.setState({
-          Posts: PrevPosts.concat(newpost)
-        });
+        this.setState(
+          {
+            Posts: PrevPosts.concat(newpost)
+          },
+          this._storeData
+        );
         this.props.navigation.navigate("MainScreen", { myparam: false });
       } else if (signal) {
         const PrevPosts2 = [...this.state.Posts];
@@ -60,9 +77,12 @@ export default class MainScreen extends Component {
 
         PrevPosts2.splice(deleteIndex, 1);
 
-        this.setState({
-          Posts: PrevPosts2
-        });
+        this.setState(
+          {
+            Posts: PrevPosts2
+          },
+          this._storeData
+        );
         this.props.navigation.navigate("MainScreen", { signal: false });
       }
     });
