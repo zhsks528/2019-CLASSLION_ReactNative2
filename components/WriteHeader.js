@@ -3,10 +3,11 @@ import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { withNavigation } from "react-navigation";
 
-const WriteHeader = ({ navigation }) => {
+const WriteHeader = ({ navigation, saveProps }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        activeOpacity={0.8}
         onPress={() => {
           navigation.goBack();
         }}
@@ -17,16 +18,15 @@ const WriteHeader = ({ navigation }) => {
 
       <View style={styles.iconContainer}>
         <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
+          activeOpacity={0.8}
           hitSlop={{ top: 2, bottom: 2, left: 2, right: 2 }}
         >
           <Ionicons name="ios-image" size={25} />
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.8}
           onPress={() => {
-            navigation.goBack();
+            saveProps();
           }}
           hitSlop={{ top: 2, bottom: 2, left: 2, right: 2 }}
         >

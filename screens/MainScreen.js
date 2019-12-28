@@ -26,17 +26,33 @@ export default class MainScreen extends Component {
     selectedDate: "",
     Posts: [
       {
+        id: 1,
         title: "12월 27일에 쓴 글 1",
         content: "본문2",
         date: "2019-12-27"
       },
       {
+        id: 2,
         title: "12월 27일에 쓴 글 2",
         content: "본문2",
         date: "2019-12-27"
       }
     ]
   };
+
+  componentDidMount() {
+    this.props.navigation.addListener("didFocus", () => {
+      newpost = this.props.navigation.getParam("myparam");
+
+      if (newpost) {
+        const PrevPosts = [...this.state.Posts];
+        this.setState({
+          Posts: PrevPosts.concat(newpost)
+        });
+        this.props.navigation.navigate("MainScreen", { myparam: false });
+      }
+    });
+  }
 
   render() {
     return (
