@@ -35,7 +35,7 @@ export default class DetailScreen extends Component {
             </View>
             {this.post.imageUri ? (
               <Image
-                source={{ uri: this.state.imageUri }}
+                source={{ uri: this.post.imageUri }}
                 style={{ width: 200, height: 200 }}
               />
             ) : null}

@@ -16,7 +16,7 @@ export default class MainScreen extends Component {
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
       <MaterialCommunityIcons
-        name="calender-multiselect"
+        name="calendar-multiselect"
         size={30}
         style={{ color: tintColor }}
       />

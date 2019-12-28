@@ -43,7 +43,7 @@ export default class WriteScreen extends Component {
   _gettoday = () => {
     tyear = new Date().getFullYear().toString();
     tmonth = (new Date().getMonth() + 1).toString();
-    tday = new Date().getDay().toString();
+    tday = new Date().getDate().toString();
 
     if (parseInt(tmonth) < 10) {
       tmonth = "0" + tmonth;
@@ -64,11 +64,13 @@ export default class WriteScreen extends Component {
         id: id,
         title: this.state.inputtitle,
         content: this.state.inputcontent,
-        date: date
+        date: date,
+        imageUri: this.state.imageUri
       };
       this.setState({
         inputtitle: "",
-        inputcontent: ""
+        inputcontent: "",
+        imageUri: ""
       });
       this.props.navigation.navigate("MainScreen", { myparam: newpost });
     } else {
