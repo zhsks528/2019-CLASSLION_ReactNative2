@@ -1,10 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import {
-  createBottomTabNavigator,
-  createStackNavigator,
-  createAppContainer
-} from "react-navigation";
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createStackNavigator } from "react-navigation-stack";
 import MainScreen from "./screens/MainScreen";
 import DetailScreen from "./screens/DetailScreen";
 import WriteScreen from "./screens/WriteScreen";
