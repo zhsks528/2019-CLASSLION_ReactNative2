@@ -43,6 +43,7 @@ export default class MainScreen extends Component {
   componentDidMount() {
     this.props.navigation.addListener("didFocus", () => {
       newpost = this.props.navigation.getParam("myparam");
+      signal = this.props.navigation.getParam("signal");
 
       if (newpost) {
         const PrevPosts = [...this.state.Posts];
@@ -50,6 +51,19 @@ export default class MainScreen extends Component {
           Posts: PrevPosts.concat(newpost)
         });
         this.props.navigation.navigate("MainScreen", { myparam: false });
+      } else if (signal) {
+        const PrevPosts2 = [...this.state.Posts];
+
+        deleteIndex = PrevPosts2.findIndex(item => {
+          return item.id === signal;
+        });
+
+        PrevPosts2.splice(deleteIndex, 1);
+
+        this.setState({
+          Posts: PrevPosts2
+        });
+        this.props.navigation.navigate("MainScreen", { signal: false });
       }
     });
   }

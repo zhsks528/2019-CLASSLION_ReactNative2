@@ -20,10 +20,14 @@ export default class DetailScreen extends Component {
 
   post = this.props.navigation.getParam("post");
 
+  _deletesignal = () => {
+    this.props.navigation.navigate("MainScreen", { signal: this.post.id });
+  };
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <DetailHeader />
+        <DetailHeader deleteProps={this._deletesignal} />
         {this.post ? (
           <View>
             <View style={styles.detailbox}>
