@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DetailHeader from "../components/DetailHeader";
@@ -29,6 +29,12 @@ export default class DetailScreen extends Component {
             <View style={styles.detailbox}>
               <Text style={styles.detailtitle}>제목 : {this.post.title}</Text>
             </View>
+            {this.post.imageUri ? (
+              <Image
+                source={{ uri: this.state.imageUri }}
+                style={{ width: 200, height: 200 }}
+              />
+            ) : null}
             <View style={styles.detailbox}>
               <Text style={styles.detailcontent}>
                 내용 : {this.post.content}

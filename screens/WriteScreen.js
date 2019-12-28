@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Dimensions, TextInput } from "react-native";
+import { StyleSheet, View, Dimensions, TextInput, Image } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Writeheader from '../components/WriteHeader';
 import uuid from "uuid/v1";
+import * as ImagePicker from 'expo-image-picker';
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,7 +25,8 @@ export default class WriteScreen extends Component {
 
   state = {
     inputtitle : "",
-    inputcontent : ""
+    inputcontent : "",
+    imageUri : "",
   }
 
   _changetitle = (value) => {
@@ -77,17 +79,28 @@ export default class WriteScreen extends Component {
     }
   }
 
+  _selectImage = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing : true
+    });
+
+    this.setState({
+      imageUri : result.uri 
+    })
+  }
+  
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>
-          <Writeheader saveProps={this._saveText}/>
+          <Writeheader saveProps={this._saveText} selectImage={this._selectImage}/>
           <TextInput
             onChangeText={this._changetitle}
             value={this.state.inputtitle}
             placeholder="제목을 입력하세요"
             style={styles.title}
             returnKeyType="done" />
+          {this.state.imageUri ? <Image source={{uri : this.state.imageUri}} style={{width : 200, height : 200}} /> : null}
           <TextInput
             onChangeText={this._changecontent}
             value={this.state.inputcontent}

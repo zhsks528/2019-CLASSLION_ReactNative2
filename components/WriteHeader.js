@@ -3,7 +3,7 @@ import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { withNavigation } from "react-navigation";
 
-const WriteHeader = ({ navigation, saveProps }) => {
+const WriteHeader = ({ navigation, saveProps, selectImage }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -20,6 +20,9 @@ const WriteHeader = ({ navigation, saveProps }) => {
         <TouchableOpacity
           activeOpacity={0.8}
           hitSlop={{ top: 2, bottom: 2, left: 2, right: 2 }}
+          onPress={() => {
+            selectImage();
+          }}
         >
           <Ionicons name="ios-image" size={25} />
         </TouchableOpacity>
